@@ -19,7 +19,6 @@ export default class Knight extends Piece {
 
         const moves = [];
 
-
         for(const move of possibleMoves) {
             if(move.row < 0 || move.row > 7 || move.col < 0 || move.col > 7) {
                 continue;
@@ -27,8 +26,6 @@ export default class Knight extends Piece {
                 moves.push(move)
             }
         }
-
-
         return moves;
     }
 }
