@@ -40,6 +40,18 @@ export default class Bishop extends Piece {
             moves.push(move);
         }
 
-        return moves;
+        let  piecePosition = '';
+
+        for(const move of moves) {
+            if (board.getPiece(move)) {
+                piecePosition = move;
+            }
+        }
+
+        if(piecePosition) {
+            return moves.splice(0, 0, moves.indexOf(piecePosition))
+        } else {
+            return moves
+        }
     }
 }
