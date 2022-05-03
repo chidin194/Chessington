@@ -32,7 +32,8 @@ export default class Board {
                 }
             }
         }
-        throw new Error('The supplied piece is not on the board');
+        // throw new Error('The supplied piece is not on the board');
+        return false
     }
 
     movePiece(fromSquare, toSquare) {
