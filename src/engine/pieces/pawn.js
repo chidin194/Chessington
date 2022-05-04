@@ -16,6 +16,9 @@ export default class Pawn extends Piece {
             return !board.getPiece(move);
         }
 
+        // function checkBoardBounds(move) {
+        //     return !(move.row < 0 || move.row > 7 || move.col < 0 || move.col > 7)
+        // }
 
         if (this.player === Player.WHITE) {
             if (location.row === 1) {
@@ -28,9 +31,11 @@ export default class Pawn extends Piece {
                     return possibleMoves;
                 }
 
-            } else {
+            } else if (location.row <= 6) {
                 availableMoves = [Square.at(location.row + 1, location.col)];
                 return availableMoves.filter(checkBlockingPiece);
+            } else {
+                return [];
             }
         }
         else {
@@ -41,9 +46,12 @@ export default class Pawn extends Piece {
                     return [];
                 } else {
                     return possibleMoves;
-                }            } else {
+                }
+            } else if(location.row >= 1) {
                 availableMoves = [Square.at(location.row - 1, location.col)]
                 return availableMoves.filter(checkBlockingPiece);
+            } else {
+                return [];
             }
         }
     }
