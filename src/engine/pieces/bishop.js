@@ -53,7 +53,7 @@ export default class Bishop extends Piece {
         if(piecePosition) {
             const pieceToTake = board.getPiece(piecePosition);
             if(pieceToTake instanceof King) {
-                return moves.slice(0, moves.indexOf(piecePosition))-1;
+                return moves.slice(0, moves.indexOf(piecePosition));
             } else if (this.player === Player.BLACK && pieceToTake.player === Player.WHITE) {
                 return moves.slice(0, moves.indexOf(piecePosition)+1);
             }  else if (this.player === Player.WHITE && pieceToTake.player === Player.BLACK) {

@@ -1,5 +1,7 @@
 import Bishop from "./bishop";
 import Square from "../square";
+import King from "./king";
+import Player from "../player";
 
 export default class Queen extends Bishop {
     constructor(player) {
@@ -34,7 +36,16 @@ export default class Queen extends Bishop {
         }
 
         if(piecePosition) {
-            return moves.splice(0, 0, moves.indexOf(piecePosition)).concat(availableMoves);
+            const pieceToTake = board.getPiece(piecePosition);
+            if(pieceToTake instanceof King) {
+                return moves.slice(0, moves.indexOf(piecePosition)).concat(availableMoves);
+            } else if (this.player === Player.BLACK && pieceToTake.player === Player.WHITE) {
+                return moves.slice(0, moves.indexOf(piecePosition)+1).concat(availableMoves);
+            }  else if (this.player === Player.WHITE && pieceToTake.player === Player.BLACK) {
+                return moves.slice(0, moves.indexOf(piecePosition)+1).concat(availableMoves);
+            } else {
+                return moves.slice(0, moves.indexOf(piecePosition)).concat(availableMoves);
+            }
         } else {
             return moves.concat(availableMoves);
         }
