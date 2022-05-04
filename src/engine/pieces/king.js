@@ -1,5 +1,6 @@
 import Piece from './piece';
 import Square from "../square";
+import Player from "../player";
 
 export default class King extends Piece {
     constructor(player) {
@@ -23,6 +24,28 @@ export default class King extends Piece {
                 moves.push(move)
             }
         }
-        return moves;
+
+        let  piecePosition = '';
+
+        for(const move of moves) {
+            if (board.getPiece(move)) {
+                piecePosition = move;
+            }
+        }
+
+        if(piecePosition) {
+            const pieceToTake = board.getPiece(piecePosition);
+            if(pieceToTake instanceof King) {
+                return moves.slice(0, moves.indexOf(piecePosition));
+            } else if (this.player === Player.BLACK && pieceToTake.player === Player.WHITE) {
+                return moves.slice(0, moves.indexOf(piecePosition)+1);
+            }  else if (this.player === Player.WHITE && pieceToTake.player === Player.BLACK) {
+                return moves.slice(0, moves.indexOf(piecePosition)+1);
+            } else {
+                return moves.slice(0, moves.indexOf(piecePosition));
+            }
+        } else {
+            return moves;
+        }
     }
 }
